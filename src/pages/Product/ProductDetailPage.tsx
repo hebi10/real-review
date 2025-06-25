@@ -11,6 +11,9 @@ const Box = styled.div`
   box-shadow: 0 1px 5px rgba(0,0,0,0.05);
   padding: 2rem;
   margin-bottom: 2.2rem;
+  @media (max-width: 600px) {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const Img = styled.img`
@@ -18,6 +21,9 @@ const Img = styled.img`
   max-width: 400px;
   border-radius: 1rem;
   margin-bottom: 1.5rem;
+  @media (max-width: 600px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const LinkButton = styled.a`
@@ -28,7 +34,11 @@ const LinkButton = styled.a`
   border-radius: 0.8rem;
   font-weight: 700;
   margin-top: 1rem;
-  
+  @media (max-width: 600px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
   &:not(:last-child) {
     margin-right: 1rem;
   }
@@ -39,6 +49,9 @@ const ReviewBox = styled.div`
   border-radius: 1rem;
   padding: 1rem 1.3rem;
   margin-bottom: 1.2rem;
+  @media (max-width: 600px) {
+    padding: 0.8rem 1rem;
+  }
 `;
 
 function ProductDetailPage() {
@@ -76,9 +89,9 @@ function ProductDetailPage() {
         ))}
         <form style={{marginTop:"2.2rem"}}>
           <h3 style={{fontSize:"1.1rem",marginBottom:"0.7rem"}}>후기 작성</h3>
-          <input type="text" placeholder="닉네임" required style={{padding:"0.6rem",borderRadius:"0.6rem",border:"1px solid #bbb",width:"40%",marginBottom:"0.5rem"}}/>
+          <input type="text" placeholder="닉네임" required style={{padding:"0.6rem",borderRadius:"0.6rem",border:"1px solid #bbb",width:"100%",maxWidth:"300px",marginBottom:"0.5rem"}}/>
           <br/>
-          <textarea placeholder="후기를 입력하세요." required style={{width:"90%",height:"60px",padding:"0.7rem",borderRadius:"0.6rem",border:"1px solid #bbb",marginBottom:"0.7rem"}}/>
+          <textarea placeholder="후기를 입력하세요." required style={{width:"100%",height:"80px",padding:"0.7rem",borderRadius:"0.6rem",border:"1px solid #bbb",maxWidth:"500px",marginBottom:"0.7rem"}}/>
           <br/>
           <button type="submit" style={{background:"#3366ff",color:"#fff",border:"none",borderRadius:"0.7rem",padding:"0.6rem 1.1rem",fontWeight:700}}>후기 등록</button>
         </form>
