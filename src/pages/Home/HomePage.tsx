@@ -9,6 +9,9 @@ const Grid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
+  @media (max-width: 600px) {
+    gap: 1.2rem;
+  }
 `;
 
 const Card = styled.div`

@@ -21,11 +21,20 @@ const Header = styled.header`
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: 0.1em;
+  @media (max-width: 600px) {
+    padding: 0.8rem 0;
+    font-size: 1.2rem;
+  }
 
   img {
     width: 70px;
     height: 70px;
     margin-right: 1rem;
+    @media (max-width: 600px) {
+      width: 50px;
+      height: 50px;
+      margin-right: 0.5rem;
+    }
   }
 `;
 
@@ -36,6 +45,12 @@ const Nav = styled.nav`
   gap: 1.5rem;
   justify-content: center;
   padding: 0.5rem 0;
+  @media (max-width: 600px) {
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    padding: 0.6rem 0;
+  }
   a {
     color: #333;
     text-decoration: none;
@@ -52,6 +67,9 @@ const Main = styled.main`
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1rem 3rem 1rem;
+  @media (max-width: 600px) {
+    padding: 1.5rem 0.8rem 3rem 0.8rem;
+  }
 `;
 
 const Footer = styled.footer`
@@ -61,6 +79,10 @@ const Footer = styled.footer`
   padding: 1.2rem 0 1.7rem 0;
   font-size: 1rem;
   margin-top: auto;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+    padding: 1rem 0 1.5rem 0;
+  }
 `;
 
 interface Props {

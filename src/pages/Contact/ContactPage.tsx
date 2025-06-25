@@ -2,12 +2,16 @@ import Layout from "../../components/Layout";
 import styled from "styled-components";
 
 const Form = styled.form`
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   background: #fff;
   border-radius: 1rem;
   max-width: 500px;
+  width: 100%;
   padding: 2rem 1.2rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  @media (max-width: 500px) {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 function ContactPage() {
