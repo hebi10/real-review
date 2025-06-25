@@ -2,8 +2,10 @@
 import Layout from "../../components/Layout";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../redux/store";
+import { addReview } from "../../redux/reviewSlice";
+import { v4 as uuidv4 } from "uuid";
 
 const Box = styled.div`
   background: #fff;
@@ -43,12 +45,22 @@ const ReviewBox = styled.div`
 
 function ProductDetailPage() {
   const { id } = useParams<{id:string}>();
+  const dispatch = useDispatch<AppDispatch>();
   const products = useSelector((state: RootState) => state.product);
   const item = products.find(p=>p.id===id) || products[0];
-  const reviews = [
-    { id: "r1", name: "사용자A", content: "정말 잘 빨리고 소음이 적어요!", rating: 5 },
-    { id: "r2", name: "사용자B", content: "디자인이 예쁘고 생각보다 가벼워요.", rating: 4 }
-  ];
+  const reviews = useSelector((state: RootState) =>
+    state.review.filter(r => r.productId === item.id)
+  );
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const content = (form.elements.namedItem("content") as HTMLTextAreaElement).value;
+    if (!name || !content) return;
+    dispatch(addReview({ id: uuidv4(), productId: item.id, name, content, rating: 5 }));
+    form.reset();
+  };
   return (
     <Layout>
       <Box>
@@ -74,11 +86,11 @@ function ProductDetailPage() {
             <div style={{marginTop:"0.6rem"}}>{r.content}</div>
           </ReviewBox>
         ))}
-        <form style={{marginTop:"2.2rem"}}>
+        <form onSubmit={handleSubmit} style={{marginTop:"2.2rem"}}>
           <h3 style={{fontSize:"1.1rem",marginBottom:"0.7rem"}}>후기 작성</h3>
-          <input type="text" placeholder="닉네임" required style={{padding:"0.6rem",borderRadius:"0.6rem",border:"1px solid #bbb",width:"40%",marginBottom:"0.5rem"}}/>
+          <input name="name" type="text" placeholder="닉네임" required style={{padding:"0.6rem",borderRadius:"0.6rem",border:"1px solid #bbb",width:"40%",marginBottom:"0.5rem"}}/>
           <br/>
-          <textarea placeholder="후기를 입력하세요." required style={{width:"90%",height:"60px",padding:"0.7rem",borderRadius:"0.6rem",border:"1px solid #bbb",marginBottom:"0.7rem"}}/>
+          <textarea name="content" placeholder="후기를 입력하세요." required style={{width:"90%",height:"60px",padding:"0.7rem",borderRadius:"0.6rem",border:"1px solid #bbb",marginBottom:"0.7rem"}}/>
           <br/>
           <button type="submit" style={{background:"#3366ff",color:"#fff",border:"none",borderRadius:"0.7rem",padding:"0.6rem 1.1rem",fontWeight:700}}>후기 등록</button>
         </form>
